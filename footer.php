@@ -1,0 +1,1 @@
+<footer class="site-footer"><div class="container"><strong>BSKTV</strong><p>商務KTV／酒店店家資訊平台</p></div></footer><?php wp_footer(); ?></body></html>
