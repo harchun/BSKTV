@@ -1,1 +1,1 @@
-<footer class="site-footer"><div class="container"><strong>BSKTV</strong><p>商務KTV／酒店店家資訊平台</p></div></footer><?php wp_footer(); ?></body></html>
+<footer class="site-footer"><div class="container footer-inner"><div><strong style="color:#fff">BS<span style="color:var(--gold)">KTV</span></strong><p>商務 KTV／酒店店家資訊平台</p></div><div>© <?php echo esc_html(wp_date('Y')); ?> BSKTV. All rights reserved.</div></div></footer><?php wp_footer(); ?></body></html>
