@@ -1,0 +1,1 @@
+<?php /* Template Name: 我的收藏 */ get_header(); ?><main class="container section"><header class="archive-head"><span class="eyebrow">MY FAVORITES</span><h1>我的收藏</h1><p>收藏資料儲存在你的瀏覽器，不需要會員帳號。</p></header><div class="store-grid" data-favorites-list><div class="empty-state"><h2>載入收藏中…</h2></div></div></main><?php get_footer(); ?>
