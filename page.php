@@ -1,0 +1,1 @@
+<?php get_header(); ?><main class="container section"><article class="article-main"><header class="archive-head"><span class="eyebrow">BSKTV</span><h1><?php the_title(); ?></h1></header><?php while(have_posts()):the_post(); ?><div class="article-content"><?php the_content(); ?></div><?php endwhile; ?></article></main><?php get_footer(); ?>
