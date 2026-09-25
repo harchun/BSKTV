@@ -1,20 +1,5 @@
 <?php
 if(!defined('ABSPATH'))exit;
-
-function bsktv_store_lady_price_box(){add_meta_box('bsktv_lady_price','小姐費用','bsktv_store_lady_price_render','post','side','default');}
-add_action('add_meta_boxes','bsktv_store_lady_price_box');
-
-function bsktv_store_lady_price_render($post){
-    wp_nonce_field('bsktv_lady_price_save','bsktv_lady_price_nonce');
-    $value=get_post_meta($post->ID,'bsktv_lady_price',true);
-    echo '<p><label><strong>小姐費用</strong><br><input style="width:100%" type="number" min="0" step="0.01" name="bsktv_lady_price" value="'.esc_attr($value).'" /></label></p><p class="description">前台右側店家資訊會顯示此費用。</p>';
-}
-
-function bsktv_store_lady_price_save($id){
-    if(!isset($_POST['bsktv_lady_price_nonce'])||!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['bsktv_lady_price_nonce'])),'bsktv_lady_price_save'))return;
-    if(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)return;
-    if(wp_is_post_revision($id)||!current_user_can('edit_post',$id))return;
-    $value=isset($_POST['bsktv_lady_price'])?floatval(wp_unslash($_POST['bsktv_lady_price'])):0;
-    if($value<=0)delete_post_meta($id,'bsktv_lady_price');else update_post_meta($id,'bsktv_lady_price',$value);
-}
-add_action('save_post_post','bsktv_store_lady_price_save',20);
+function bsktv_store_admin_box(){add_meta_box('bsktv_store_admin','平台管理','bsktv_store_admin_render','post','side','high');}add_action('add_meta_boxes','bsktv_store_admin_box');
+function bsktv_store_admin_render($post){wp_nonce_field('bsktv_store_admin_save','bsktv_store_admin_nonce');$status=get_post_meta($post->ID,'bsktv_status',true)?:'active';$verified=get_post_meta($post->ID,'bsktv_verified',true)==='1';$line=get_post_meta($post->ID,'bsktv_line_url_override',true);$date=get_post_meta($post->ID,'bsktv_verified_at',true);echo '<p><label><strong>店家狀態</strong><br><select style="width:100%" name="bsktv_status"><option value="active" '.selected($status,'active',false).'>營業中</option><option value="pending" '.selected($status,'pending',false).'>資料待確認</option><option value="paused" '.selected($status,'paused',false).'>暫停營業</option><option value="closed" '.selected($status,'closed',false).'>已歇業</option></select></label></p>';echo '<p><label><input type="checkbox" name="bsktv_verified" value="1" '.checked($verified,true,false).'> 資料已確認</label></p>';echo '<p><label><strong>店家專屬 LINE 加好友連結</strong><br><input style="width:100%" type="url" name="bsktv_line_url_override" value="'.esc_attr($line).'" placeholder="留空使用全站 LINE" /></label></p>';echo '<p><label><strong>資料確認日期</strong><br><input style="width:100%" type="date" name="bsktv_verified_at" value="'.esc_attr($date).'" /></label></p><p class="description">店家專屬 LINE 留空時，會使用「外觀 → 自訂 → BSKTV 首頁設定」的全站 LINE。</p>';}
+function bsktv_store_admin_save($id){if(!isset($_POST['bsktv_store_admin_nonce'])||!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['bsktv_store_admin_nonce'])),'bsktv_store_admin_save'))return;if(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)return;if(wp_is_post_revision($id)||!current_user_can('edit_post',$id))return;$status=isset($_POST['bsktv_status'])?sanitize_key(wp_unslash($_POST['bsktv_status'])):'active';if(!in_array($status,array('active','pending','paused','closed'),true))$status='active';update_post_meta($id,'bsktv_status',$status);update_post_meta($id,'bsktv_verified',isset($_POST['bsktv_verified'])?'1':'0');$line=isset($_POST['bsktv_line_url_override'])?esc_url_raw(wp_unslash($_POST['bsktv_line_url_override'])):'';if($line)update_post_meta($id,'bsktv_line_url_override',$line);else delete_post_meta($id,'bsktv_line_url_override');$date=isset($_POST['bsktv_verified_at'])?sanitize_text_field(wp_unslash($_POST['bsktv_verified_at'])):'';if($date&&preg_match('/^\d{4}-\d{2}-\d{2}$/',$date))update_post_meta($id,'bsktv_verified_at',$date);else delete_post_meta($id,'bsktv_verified_at');}add_action('save_post_post','bsktv_store_admin_save',20);
