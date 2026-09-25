@@ -6,6 +6,7 @@ require_once get_template_directory().'/inc/metadata.php';
 require_once get_template_directory().'/inc/helpers.php';
 require_once get_template_directory().'/inc/features.php';
 require_once get_template_directory().'/inc/seo.php';
+require_once get_template_directory().'/inc/store-admin.php';
 function bsktv_assets(){ $v=wp_get_theme()->get('Version'); wp_enqueue_style('bsktv-style',get_stylesheet_uri(),array(),$v); wp_enqueue_script('bsktv-js',get_template_directory_uri().'/assets/js/bsktv.js',array(),$v,true); wp_localize_script('bsktv-js','BSKTV',array('ajaxUrl'=>admin_url('admin-ajax.php'),'nonce'=>wp_create_nonce('bsktv_frontend'),'homeUrl'=>home_url('/'))); }
 add_action('wp_enqueue_scripts','bsktv_assets');
 function bsktv_widgets(){register_sidebar(array('name'=>'側邊欄','id'=>'sidebar-1','before_widget'=>'<section class="widget">','after_widget'=>'</section>','before_title'=>'<h2>','after_title'=>'</h2>'));} add_action('widgets_init','bsktv_widgets');
