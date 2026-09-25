@@ -1,0 +1,4 @@
+<?php
+if(!defined('ABSPATH'))exit;
+function bsktv_admin_columns($columns){$columns['bsktv_status']='狀態';$columns['bsktv_views']='瀏覽';$columns['bsktv_line_clicks']='LINE 點擊';return $columns;}add_filter('manage_post_posts_columns','bsktv_admin_columns');
+function bsktv_admin_column_content($column,$post_id){if($column==='bsktv_status'){$s=get_post_meta($post_id,'bsktv_status',true)?:'active';$map=array('active'=>'營業中','pending'=>'待確認','paused'=>'暫停','closed'=>'歇業');echo esc_html($map[$s]??$s);}elseif($column==='bsktv_views'){echo esc_html(number_format_i18n((int)get_post_meta($post_id,'bsktv_views',true)));}elseif($column==='bsktv_line_clicks'){echo esc_html(number_format_i18n((int)get_post_meta($post_id,'bsktv_line_clicks',true)));}}add_action('manage_post_posts_custom_column','bsktv_admin_column_content',10,2);
