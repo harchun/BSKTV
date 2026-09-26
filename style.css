@@ -979,3 +979,14 @@ button:disabled{cursor:not-allowed}
   .term-card:hover,
   .btn:hover{transform:none}
 }
+
+.site-brand{display:inline-flex;align-items:center;min-width:0}
+.site-brand-logo{width:auto;max-width:180px;max-height:48px;object-fit:contain}
+.site-brand-text{display:inline-block}
+.footer-brand strong{font-size:22px;color:#fff}
+.footer-brand strong span{color:var(--gold)}
+.footer-nav ul{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.footer-nav li{list-style:none}
+.footer-nav a{display:inline-flex;padding:7px 9px;border-radius:8px;color:#aaa49a;font-size:12px}
+.footer-nav a:hover{color:#fff;background:#171713}
+@media(max-width:700px){.site-brand-logo{max-width:150px;max-height:42px}.footer-nav ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
