@@ -113,23 +113,23 @@ if($featured->have_posts()):
       <div><span class="eyebrow">LATEST</span><h2>最新收錄</h2><p class="section-subtitle">最近加入或更新的店家。</p></div>
       <a class="text-link" href="<?php echo esc_url(get_post_type_archive_link('post')?:home_url('/')); ?>">探索全部 →</a>
     </div>
-    <div class="store-grid" data-home-latest data-home-latest-items data-page="1">
-      <?php
-      $latest = new WP_Query(array(
-        'post_type'=>'post',
-        'post_status'=>'publish',
-        'posts_per_page'=>6,
-        'paged'=>1,
-        'orderby'=>'modified',
-        'order'=>'DESC',
-        'ignore_sticky_posts'=>true,
-        'meta_query'=>bsktv_active_status_meta_query(),
-      ));
-      while($latest->have_posts()):$latest->the_post();get_template_part('template-parts/store-card');endwhile;
-      wp_reset_postdata();
-      ?>
+    <?php
+    $latest = new WP_Query(array(
+      'post_type'=>'post',
+      'post_status'=>'publish',
+      'posts_per_page'=>6,
+      'paged'=>1,
+      'orderby'=>'modified',
+      'order'=>'DESC',
+      'ignore_sticky_posts'=>true,
+      'meta_query'=>bsktv_active_status_meta_query(),
+    ));
+    ?>
+    <div class="store-grid" data-home-latest data-home-latest-items data-page="1" data-has-more="<?php echo esc_attr($latest->max_num_pages > 1 ? '1' : '0'); ?>">
+      <?php while($latest->have_posts()):$latest->the_post();get_template_part('template-parts/store-card');endwhile; ?>
     </div>
-    <div class="infinite-status" data-home-latest-status aria-live="polite"></div>
+    <?php wp_reset_postdata(); ?>
+    <div class="infinite-status" data-home-latest-status aria-live="polite"><?php if($latest->max_num_pages <= 1): ?>已載入全部店家<?php endif; ?></div>
   </div>
 </section>
 
