@@ -16,7 +16,6 @@ function bsktv_assets() {
     $theme = wp_get_theme();
     $v = $theme->get('Version');
     wp_enqueue_style('bsktv-style', get_stylesheet_uri(), array(), $v);
-    wp_enqueue_style('bsktv-enhancements', get_template_directory_uri().'/assets/css/bsktv-enhancements.css', array('bsktv-style'), $v);
     wp_enqueue_script('bsktv-js', get_template_directory_uri().'/assets/js/bsktv.js', array(), $v, true);
     wp_localize_script('bsktv-js', 'BSKTV', array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
