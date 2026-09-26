@@ -41,3 +41,9 @@ function bsktv_active_store_count() {
     wp_cache_set('bsktv_active_store_count', $count, 'bsktv', 300);
     return $count;
 }
+
+function bsktv_clear_runtime_cache() {
+    wp_cache_delete('bsktv_active_store_count', 'bsktv');
+}
+add_action('save_post_post', 'bsktv_clear_runtime_cache', 99);
+add_action('before_delete_post', 'bsktv_clear_runtime_cache', 99);
