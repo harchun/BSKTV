@@ -1,0 +1,1 @@
+export default function PrivacyPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">PRIVACY</p><h1>隱私政策</h1></div></section><section className="section prose"><div className="shell"><h2>資料原則</h2><p>BSKTV 以提供服務所必要的資料為原則。會員功能正式上線後，將說明帳號資料、收藏、內容與網站分析資料的使用方式。</p><h2>聯絡</h2><p>若對個人資料或隱私有疑問，可透過平台公布的商務聯絡方式提出申請。</p></div></section></main>}
