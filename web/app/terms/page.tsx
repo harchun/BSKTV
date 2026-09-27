@@ -1,0 +1,1 @@
+export default function TermsPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">TERMS</p><h1>使用條款</h1></div></section><section className="section prose"><div className="shell"><h2>平台性質</h2><p>BSKTV 提供店家資訊與探索服務，部分內容可能由店家或使用者提供。使用者應自行確認實際營業狀況、價格與服務內容。</p><h2>資訊使用</h2><p>不得以自動化方式大量擷取、重製或干擾平台服務；不得提交虛假、侵權或違法內容。</p></div></section></main>}
