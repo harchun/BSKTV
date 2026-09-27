@@ -1,4 +1,3 @@
 import Link from 'next/link'
-import { cities } from '@/lib/data'
-
-export default function CitiesPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">DISCOVER BY CITY</p><h1>城市</h1><p>選擇城市，開始探索當地店家。</p></div></section><section className="section"><div className="shell"><div className="city-grid">{cities.map(city=><Link className="city-card" href={`/venues?city=${encodeURIComponent(city)}`} key={city}><strong>{city}</strong><span>查看店家 →</span></Link>)}</div></div></section></main>}
+import { cities, venues } from '@/lib/data'
+export default function CitiesPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">DISCOVER BY CITY</p><h1>城市探索</h1><p>從台灣主要城市開始，找到你今晚想去的地方。</p></div></section><section className="section"><div className="shell"><div className="city-grid">{cities.map((city,i)=><Link className="city-card city-card-large" href={`/venues?city=${encodeURIComponent(city)}`} key={city}><small>0{i+1}</small><strong>{city}</strong><span>{venues.filter(v=>v.city===city).length} 間店家　→</span></Link>)}</div></div></section></main>}
