@@ -1,34 +1,16 @@
-export type Venue = {
-  slug: string
-  name: string
-  city: string
-  district: string
-  type: string
-  status: '營業中' | '暫停營業' | '歇業'
-  description: string
-  tags: string[]
-  priceFrom?: number
-  updatedAt: string
-}
-
-export const cities = ['高雄', '台中', '台北', '新竹']
-export const types = ['商務KTV', '酒店', 'KTV', '會館']
-
-export const venues: Venue[] = [
-  {
-    slug: 'sample-venue',
-    name: 'BSKTV 精選店家',
-    city: '高雄',
-    district: '前金區',
-    type: '商務KTV',
-    status: '營業中',
-    description: '這是新平台的示範店家資料。正式資料層完成後，這裡會由店家資料庫提供。',
-    tags: ['商務', '包廂', '熱門'],
-    priceFrom: 3000,
-    updatedAt: '2026-09-27',
-  },
-]
-
-export function getVenue(slug: string) {
-  return venues.find((venue) => venue.slug === slug)
-}
+export type VenueStatus = '營業中' | '暫停營業' | '歇業'
+export type Venue = { slug:string; name:string; city:string; district:string; type:string; status:VenueStatus; description:string; tags:string[]; priceFrom?:number; updatedAt:string; address:string; phone:string; hours:string; image:string; featured?:boolean; verified?:boolean; website?:string }
+export type NowPost = { slug:string; title:string; excerpt:string; city:string; tag:string; date:string; author:string }
+export const cities=['高雄','台中','台北','新竹']; export const types=['商務KTV','酒店','KTV','會館']
+export const venues:Venue[]=[
+{slug:'sun-moon-stars',name:'日月星辰商務KTV',city:'高雄',district:'前金區',type:'商務KTV',status:'營業中',description:'高雄商務娛樂與包廂聚會資訊，適合商務接待、朋友聚會與夜間娛樂。',tags:['商務','包廂','聚會','熱門'],priceFrom:3000,updatedAt:'2026-09-27',address:'高雄市前金區七賢二路191號',phone:'07-0000-0000',hours:'19:00–05:00',image:'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80',featured:true,verified:true},
+{slug:'kaohsiung-business-ktv',name:'高雄精選商務會館',city:'高雄',district:'苓雅區',type:'會館',status:'營業中',description:'以舒適包廂、聚會與商務接待為主的夜間娛樂場所。',tags:['會館','包廂','接待'],priceFrom:2800,updatedAt:'2026-09-25',address:'高雄市苓雅區中山二路',phone:'07-0000-0001',hours:'18:00–04:00',image:'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1200&q=80',featured:true},
+{slug:'taichung-night',name:'台中夜宴商務KTV',city:'台中',district:'西屯區',type:'商務KTV',status:'營業中',description:'台中熱門商務娛樂場所，提供包廂與聚會選擇。',tags:['台中','商務','熱門'],priceFrom:3200,updatedAt:'2026-09-24',address:'台中市西屯區台灣大道',phone:'04-0000-0002',hours:'19:00–05:00',image:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',featured:true},
+{slug:'taichung-club',name:'台中星光會館',city:'台中',district:'北區',type:'會館',status:'營業中',description:'精緻會館與包廂空間，適合朋友聚會與夜間休閒。',tags:['會館','聚會','包廂'],priceFrom:2500,updatedAt:'2026-09-23',address:'台中市北區中清路',phone:'04-0000-0003',hours:'18:00–04:00',image:'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80'},
+{slug:'taipei-premium',name:'台北尊爵商務KTV',city:'台北',district:'中山區',type:'商務KTV',status:'營業中',description:'台北市區商務接待與聚會場地，交通便利。',tags:['台北','商務','市區'],priceFrom:4000,updatedAt:'2026-09-22',address:'台北市中山區中山北路',phone:'02-0000-0004',hours:'19:00–05:00',image:'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80'},
+{slug:'taipei-lounge',name:'台北夜色酒店',city:'台北',district:'松山區',type:'酒店',status:'營業中',description:'城市夜生活探索入口，提供店家基本資訊與聯絡方式。',tags:['酒店','台北','夜生活'],priceFrom:4500,updatedAt:'2026-09-21',address:'台北市松山區復興北路',phone:'02-0000-0005',hours:'20:00–05:00',image:'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80'},
+{slug:'hsinchu-k',name:'新竹星鑽KTV',city:'新竹',district:'東區',type:'KTV',status:'營業中',description:'新竹聚會與娛樂選擇，適合朋友歡唱與團體活動。',tags:['KTV','新竹','歡唱'],priceFrom:2200,updatedAt:'2026-09-20',address:'新竹市東區中央路',phone:'03-0000-0006',hours:'18:00–04:00',image:'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=80'},
+{slug:'kaohsiung-lounge',name:'高雄皇后會館',city:'高雄',district:'新興區',type:'酒店',status:'營業中',description:'高雄市區夜間娛樂場所，提供店家資訊與交通參考。',tags:['酒店','新興區','市區'],priceFrom:3500,updatedAt:'2026-09-19',address:'高雄市新興區中山一路',phone:'07-0000-0007',hours:'20:00–05:00',image:'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1200&q=80'}]
+export const nowPosts:NowPost[]=[{slug:'kaohsiung-night-guide',title:'高雄夜生活怎麼找？從城市與類型開始',excerpt:'整理高雄店家探索方式，快速縮小選擇範圍。',city:'高雄',tag:'城市指南',date:'2026-09-27',author:'BSKTV 編輯部'},{slug:'ktv-choice',title:'商務KTV、一般KTV與會館怎麼選？',excerpt:'用店家類型、場景與預算思考今晚的選擇。',city:'全台',tag:'探索指南',date:'2026-09-25',author:'BSKTV 編輯部'},{slug:'venue-profile',title:'店家資訊完整度為什麼重要？',excerpt:'從地址、營業時間到聯絡方式，建立可信的店家頁。',city:'全台',tag:'平台動態',date:'2026-09-22',author:'BSKTV 編輯部'}]
+export function getVenue(slug:string){return venues.find(v=>v.slug===slug)}
+export function searchVenues(params:{q?:string;city?:string;type?:string}){const q=(params.q||'').trim().toLowerCase();return venues.filter(v=>{const text=[v.name,v.city,v.district,v.type,v.description,...v.tags].join(' ').toLowerCase();return(!q||text.includes(q))&&(!params.city||v.city===params.city)&&(!params.type||v.type===params.type)})}
