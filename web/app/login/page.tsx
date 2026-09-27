@@ -1,0 +1,1 @@
+export default function LoginPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">ACCOUNT</p><h1>登入 BSKTV</h1><p>收藏、推薦與會員功能將在這裡管理。</p></div></section><section className="section"><div className="shell"><div className="empty-state"><h2>會員系統下一階段開發</h2><p>目前先完成產品結構，不讓會員系統反過來限制店家探索。</p></div></div></section></main>}
