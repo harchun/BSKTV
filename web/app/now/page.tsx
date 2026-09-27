@@ -1,0 +1,1 @@
+export default function NowPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">BSKTV NOW</p><h1>正在發生的事</h1><p>推薦、心得、店家動態與平台內容會在這裡聚合。</p></div></section><section className="section"><div className="shell"><div className="empty-state"><h2>NOW 正在建立中</h2><p>下一階段會加入內容發布、推薦、收藏與會員互動。</p></div></div></section></main>}
