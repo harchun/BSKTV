@@ -1,20 +1,4 @@
+'use client'
 import Link from 'next/link'
-
-export function Header() {
-  return (
-    <header className="site-header">
-      <div className="shell header-inner">
-        <Link href="/" className="brand" aria-label="BSKTV 首頁">BS<span>KTV</span></Link>
-        <nav className="nav" aria-label="主要選單">
-          <Link href="/venues">找店家</Link>
-          <Link href="/cities">城市</Link>
-          <Link href="/now">BSKTV NOW</Link>
-        </nav>
-        <div className="header-actions">
-          <Link href="/login" className="ghost-button">登入</Link>
-          <Link href="/for-business" className="gold-button">商家入口</Link>
-        </div>
-      </div>
-    </header>
-  )
-}
+import { useState } from 'react'
+export default function Header(){const [open,setOpen]=useState(false);return <header className="site-header"><div className="shell header-inner"><Link href="/" className="brand">BS<span>KTV</span></Link><nav className={`nav ${open?'nav-open':''}`}><Link href="/venues" onClick={()=>setOpen(false)}>找店家</Link><Link href="/cities" onClick={()=>setOpen(false)}>城市</Link><Link href="/now" onClick={()=>setOpen(false)}>NOW</Link><Link href="/for-business" onClick={()=>setOpen(false)}>商家合作</Link></nav><div className="header-actions"><Link href="/favorites" className="ghost-button">收藏</Link><Link href="/login" className="gold-button">登入</Link><button className="mobile-menu" onClick={()=>setOpen(!open)} aria-label="選單" aria-expanded={open}>{open?'✕':'☰'}</button></div></div></header>}
