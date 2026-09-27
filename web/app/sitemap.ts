@@ -1,0 +1,3 @@
+import type { MetadataRoute } from 'next'
+import { venues } from '@/lib/data'
+export default function sitemap():MetadataRoute.Sitemap{const base='https://fakertw.com';return [{url:base,lastModified:new Date(),changeFrequency:'daily',priority:1},{url:`${base}/venues`,lastModified:new Date(),changeFrequency:'daily',priority:.9},{url:`${base}/cities`,lastModified:new Date(),changeFrequency:'weekly',priority:.7},{url:`${base}/now`,lastModified:new Date(),changeFrequency:'daily',priority:.7},...venues.map(v=>({url:`${base}/venues/${v.slug}`,lastModified:new Date(v.updatedAt),changeFrequency:'weekly' as const,priority:.8}))]}
