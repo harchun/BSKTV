@@ -1,55 +1,11 @@
 import Link from 'next/link'
 import { cities, types, venues } from '@/lib/data'
-
-export default function HomePage() {
-  return (
-    <main>
-      <section className="hero">
-        <div className="shell hero-inner">
-          <p className="eyebrow">BSKTV · BUSINESS KTV GUIDE</p>
-          <h1>今晚，<em>去哪一家？</em></h1>
-          <p className="hero-copy">探索台灣商務 KTV、酒店與娛樂場所，從城市、類型或店家名稱開始。</p>
-          <form className="search-box" action="/venues">
-            <label htmlFor="q" className="sr-only">搜尋店家</label>
-            <input id="q" name="q" placeholder="搜尋店家、城市、類型…" />
-            <button type="submit">開始探索</button>
-          </form>
-          <div className="chip-row">
-            {cities.map((city) => <Link href={`/venues?city=${encodeURIComponent(city)}`} key={city}>{city}</Link>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="shell">
-          <div className="section-head"><div><p className="eyebrow">DISCOVER</p><h2>從你想去的地方開始</h2></div><Link href="/cities" className="text-link">全部城市 →</Link></div>
-          <div className="city-grid">
-            {cities.map((city) => <Link className="city-card" href={`/venues?city=${encodeURIComponent(city)}`} key={city}><strong>{city}</strong><span>探索店家 →</span></Link>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-soft">
-        <div className="shell">
-          <div className="section-head"><div><p className="eyebrow">BROWSE BY TYPE</p><h2>你正在找什麼？</h2></div></div>
-          <div className="type-grid">
-            {types.map((type) => <Link className="type-card" href={`/venues?type=${encodeURIComponent(type)}`} key={type}>{type}<span>→</span></Link>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="shell">
-          <div className="section-head"><div><p className="eyebrow">FEATURED</p><h2>精選店家</h2><p className="section-note">正式資料庫接入後，這裡會由店家內容與平台資料驅動。</p></div><Link href="/venues" className="text-link">查看全部 →</Link></div>
-          <div className="venue-grid">
-            {venues.map((venue) => <Link className="venue-card" href={`/venues/${venue.slug}`} key={venue.slug}><div className="venue-image"><span>{venue.type}</span></div><div className="venue-body"><div className="venue-meta"><span>{venue.city}・{venue.district}</span><b>{venue.status}</b></div><h3>{venue.name}</h3><p>{venue.description}</p><div className="tag-row">{venue.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div></Link>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section dark-section">
-        <div className="shell cta-panel"><div><p className="eyebrow">BSKTV NOW</p><h2>不只找店家，也看大家正在分享什麼。</h2><p>未來會加入推薦、心得、收藏與店家動態。</p></div><Link href="/now" className="gold-button">探索 NOW</Link></div>
-      </section>
-    </main>
-  )
-}
+import VenueCard from '@/components/venue-card'
+export default function HomePage(){const featured=venues.filter(v=>v.featured).slice(0,6);return <main>
+<section className="hero"><div className="shell hero-inner"><p className="eyebrow">BSKTV · NIGHTLIFE DISCOVERY</p><h1>今晚，<em>去哪一家？</em></h1><p className="hero-copy">把酒店、商務KTV、KTV與會館放在同一個探索入口。用城市、類型或店家名稱，快速找到你真正想去的地方。</p><form className="search-box" action="/venues"><label htmlFor="q" className="sr-only">搜尋店家</label><input id="q" name="q" placeholder="搜尋店家、城市、類型、關鍵字…"/><button>開始探索</button></form><div className="chip-row">{cities.map(c=><Link href={`/venues?city=${encodeURIComponent(c)}`} key={c}>{c}</Link>)}{types.map(t=><Link href={`/venues?type=${encodeURIComponent(t)}`} key={t}>{t}</Link>)}</div></div></section>
+<section className="section"><div className="shell"><div className="section-head"><div><p className="eyebrow">START HERE</p><h2>先選城市，再找店家</h2><p className="section-note">從你所在的城市開始，探索附近與熱門選擇。</p></div><Link href="/cities" className="text-link">查看全部城市 →</Link></div><div className="city-grid">{cities.map((city,i)=><Link className="city-card" href={`/venues?city=${encodeURIComponent(city)}`} key={city}><small>0{i+1}</small><strong>{city}</strong><span>{venues.filter(v=>v.city===city).length} 間店家　→</span></Link>)}</div></div></section>
+<section className="section section-soft"><div className="shell"><div className="section-head"><div><p className="eyebrow">BROWSE BY TYPE</p><h2>你正在找什麼？</h2></div><Link href="/venues" className="text-link">全部店家 →</Link></div><div className="type-grid">{types.map(type=><Link className="type-card" href={`/venues?type=${encodeURIComponent(type)}`} key={type}><div><strong>{type}</strong><small>探索相關店家</small></div><span>→</span></Link>)}</div></div></section>
+<section className="section"><div className="shell"><div className="section-head"><div><p className="eyebrow">FEATURED</p><h2>精選店家</h2><p className="section-note">完整店家資料、照片、聯絡方式與探索資訊。</p></div><Link href="/venues" className="text-link">查看全部 →</Link></div><div className="venue-grid">{featured.map(v=><VenueCard venue={v} key={v.slug}/>)}</div></div></section>
+<section className="section dark-section"><div className="shell now-home"><div><p className="eyebrow">BSKTV NOW</p><h2>不只找店家，也看正在發生什麼。</h2><p>城市指南、店家動態與探索內容，讓 BSKTV 從名錄變成真正的夜生活入口。</p></div><Link href="/now" className="gold-button">進入 NOW →</Link></div></section>
+<section className="section section-soft"><div className="shell business-banner"><div><p className="eyebrow">FOR BUSINESS</p><h2>你是店家？認領你的店家頁</h2><p className="section-note">更新營業資訊、照片、聯絡方式與活動內容，讓客人更容易找到你。</p></div><Link href="/for-business" className="gold-button">商家合作</Link></div></section>
+</main>}
