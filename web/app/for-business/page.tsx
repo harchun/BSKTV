@@ -1,0 +1,1 @@
+export default function BusinessPage(){return <main><section className="page-head"><div className="shell"><p className="eyebrow">FOR BUSINESS</p><h1>店家合作</h1><p>認領店家、更新資料、發布活動與查看曝光數據。</p></div></section><section className="section"><div className="shell"><div className="empty-state"><h2>商家後台下一階段開發</h2><p>先把前台探索與店家資料模型做好，再接入認領與管理流程。</p></div></div></section></main>}
